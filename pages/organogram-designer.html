@@ -1,0 +1,341 @@
+<!doctype html>
+<html data-saved=""><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Organogram Designer</title><link id="icon-font" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.42.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'"><noscript><link id="icon-font" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.42.0/dist/tabler-icons.min.css"></noscript><style>
+:root{--font-anthropic-sans:"anthropic-sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;--font-anthropic-serif:"anthropic-serif", ui-serif, Georgia, "Times New Roman", serif}
+:root {
+  --radius: calc(0.5rem * var(--cds-rem-scale, 1));
+  --radius-composer: calc(0.875rem * var(--cds-rem-scale, 1));
+  --h-control: calc(2rem * var(--cds-rem-scale, 1));
+  --h-control-nested: calc(1.375rem * var(--cds-rem-scale, 1));
+  --icon: calc(1.25rem * var(--cds-rem-scale, 1));
+  --pad-xs: calc(0.375rem * var(--cds-rem-scale, 1));
+  --pad-sm: calc(0.5rem * var(--cds-rem-scale, 1));
+  --pad-md: calc(0.75rem * var(--cds-rem-scale, 1));
+  --pad-lg: calc(1rem * var(--cds-rem-scale, 1));
+  --pad-xl: calc(1.5rem * var(--cds-rem-scale, 1));
+  --gap-xs: calc(0.5rem * var(--cds-rem-scale, 1));
+  --gap-sm: calc(0.75rem * var(--cds-rem-scale, 1));
+  --gap-md: calc(1rem * var(--cds-rem-scale, 1));
+  --gap-lg: calc(1.75rem * var(--cds-rem-scale, 1));
+  --gap-xl: calc(2.5rem * var(--cds-rem-scale, 1));
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+  --font-system: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-anthropic-sans, var(--font-system)), var(--font-system);
+  --gray-0: #ffffff;
+  --gray-10: #fcfcfb;
+  --gray-20: #f9f9f7;
+  --gray-50: #f0efec;
+  --gray-60: #edece8;
+  --gray-100: #e1e0d9;
+  --gray-150: #d2d1c7;
+  --gray-200: #c3c2b7;
+  --gray-400: #898781;
+  --gray-500: #6d6b67;
+  --gray-600: #52514e;
+  --gray-750: #2c2c2a;
+  --gray-800: #20201f;
+  --gray-830: #1a1a19;
+  --gray-840: #181817;
+  --gray-850: #151515;
+  --gray-900: #0b0b0b;
+  --red-100: #fad6d6;
+  --red-250: #f09595;
+  --red-300: #ec7e7e;
+  --red-450: #d03b3b;
+  --red-600: #8e2626;
+  --red-800: #3c0e0e;
+  --blue-100: #cde2fb;
+  --blue-250: #86b6ef;
+  --blue-300: #6da7ec;
+  --blue-450: #2a78d6;
+  --blue-600: #184f95;
+  --blue-700: #0d366b;
+  --blue-800: #032042;
+  --fill-accent: var(--blue-450);
+  --fill-danger: var(--red-450);
+}
+:root {
+  --border: hsl(from var(--neutral-900) h s l / 10%);
+  --border-accent: var(--blue-250);
+  --border-danger: var(--red-250);
+  --border-strong: hsl(from var(--neutral-900) h s l / 20%);
+  --neutral-900: var(--gray-900);
+  --surface-0: var(--gray-20);
+  --surface-1: var(--gray-10);
+  --surface-2: var(--gray-0);
+  --surface-3: var(--gray-0);
+  --fill-primary: var(--neutral-900);
+  --bg-accent: var(--blue-100);
+  --bg-danger: var(--red-100);
+  --text-accent: var(--blue-600);
+  --text-danger: var(--red-600);
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-400);
+  --on-primary: var(--gray-0);
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --border-accent: var(--blue-700);
+    --border-danger: var(--red-600);
+    --neutral-900: var(--gray-0);
+    --surface-0: var(--gray-900);
+    --surface-1: var(--gray-850);
+    --surface-2: var(--gray-830);
+    --surface-3: var(--gray-800);
+    --bg-accent: var(--blue-800);
+    --bg-danger: var(--red-800);
+    --text-accent: var(--blue-300);
+    --text-danger: var(--red-300);
+    --text-primary: var(--gray-50);
+    --text-secondary: var(--gray-200);
+    --text-muted: var(--gray-400);
+    --on-primary: var(--gray-900);
+  }
+}
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+input, select, textarea, button { font-family: inherit; }
+body { font-family: var(--font-sans); padding: 16px; background: var(--surface-1); color: var(--text-primary); min-height: 100vh; }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#vis-container { width: 100%; position: relative; overflow: visible; color: var(--text-primary); }
+</style></head><body><div id="vis-container"><h2 class="sr-only">Organogram designer with an editable chart canvas, a side panel for position details, departments, custom fields and layout, plus import, export and saving the app as a standalone HTML file.</h2>
+<div id="og-root"><div style="height:520px;display:flex;align-items:center;justify-content:center;border:0.5px solid var(--border);border-radius:12px;color:var(--text-secondary);font-size:14px">Loading organogram designer</div></div>
+<script>
+function OrgApp(init){
+"use strict";
+const root=document.getElementById('og-root');if(!root)return;
+let solo=false;try{solo=window.self===window.top}catch(e){}
+const R={purple:['#EEEDFE','#CECBF6','#AFA9EC','#7F77DD','#534AB7','#3C3489'],teal:['#E1F5EE','#9FE1CB','#5DCAA5','#1D9E75','#0F6E56','#085041'],coral:['#FAECE7','#F5C4B3','#F0997B','#D85A30','#993C1D','#712B13'],pink:['#FBEAF0','#F4C0D1','#ED93B1','#D4537E','#993556','#72243E'],blue:['#E6F1FB','#B5D4F4','#85B7EB','#378ADD','#185FA5','#0C447C'],green:['#EAF3DE','#C0DD97','#97C459','#639922','#3B6D11','#27500A'],amber:['#FAEEDA','#FAC775','#EF9F27','#BA7517','#854F0B','#633806'],red:['#FCEBEB','#F7C1C1','#F09595','#E24B4A','#A32D2D','#791F1F'],gray:['#F1EFE8','#D3D1C7','#B4B2A9','#888780','#5F5E5A','#444441']};
+const COLORS=Object.keys(R),AC='#378ADD',XF='system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+const KEY='organogram:'+(init&&init.id?init.id:'default');
+const uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const NS=()=>Object.create(null);
+const DEF={orient:'tb',link:'elbow',cardW:210,gapX:20,gapY:48,stack:true,showAv:true,showTitle:true,showDept:false,showCount:true};
+function norm(d){d=d||{};const s={id:String(d.id||uid()),title:typeof d.title=='string'?d.title:'Untitled organogram',depts:[],fields:[],settings:Object.assign({},DEF,d.settings||{}),nodes:[]};
+(d.depts||[]).forEach(x=>x&&x.id&&s.depts.push({id:String(x.id),name:String(x.name||''),color:R[x.color]?x.color:'gray'}));
+(d.fields||[]).forEach(x=>x&&x.id&&s.fields.push({id:String(x.id),label:String(x.label||''),show:!!x.show}));
+const m=NS();(d.nodes||[]).forEach(n=>{if(!n||n.id==null||n.id===''||m[n.id])return;const o={id:String(n.id),parent:n.parent?String(n.parent):null,name:String(n.name||''),title:String(n.title||''),dept:String(n.dept||''),f:Object.assign({},n.f||{}),vacant:!!n.vacant,collapsed:!!n.collapsed};m[o.id]=o;s.nodes.push(o);});
+s.nodes.forEach(n=>{const v=NS();v[n.id]=1;let p=n.parent;while(p){if(!m[p]||v[p]){n.parent=null;break}v[p]=1;p=m[p].parent}});
+['cardW','gapX','gapY'].forEach(k=>s.settings[k]=+s.settings[k]||DEF[k]);return s}
+function company(){const L='lead',E='eng',F='fin',O='ops',P='ppl';return norm({title:'Northwind Studio',depts:[{id:L,name:'Leadership',color:'gray'},{id:E,name:'Engineering',color:'purple'},{id:F,name:'Finance',color:'teal'},{id:O,name:'Operations',color:'coral'},{id:P,name:'People',color:'pink'}],fields:[{id:'email',label:'Email'},{id:'phone',label:'Phone'},{id:'loc',label:'Location'}],
+nodes:[['ceo','','Sara Lindqvist','Chief executive officer',L],['cto','ceo','Daniel Okafor','Chief technology officer',E],['cfo','ceo','Mei Tanaka','Chief financial officer',F],['coo','ceo','Omar Haddad','Chief operating officer',O],['e1','cto','Priya Nair','Engineering manager',E],['e2','e1','Ana Costa','Senior engineer',E],['e3','e1','','Software engineer',E,1],['f1','cfo','Hannah Weiss','Financial controller',F],['f2','cfo','Yusuf Demir','Accountant',F],['o1','coo','Grace Mensah','Operations manager',O],['o2','coo','Lucia Romero','Head of people',P]].map(r=>({id:r[0],parent:r[1],name:r[2],title:r[3],dept:r[4],vacant:r[5]}))})}
+function blank(){return norm({title:'Untitled organogram',fields:[{id:'email',label:'Email'},{id:'phone',label:'Phone'}]})}
+let S=null;try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.nodes)S=norm(v)}catch(e){}
+if(!S)S=init&&init.nodes?norm(init):company();
+let byId=NS(),kids=NS(),box=NS(),H=60,sel=null,tab='details',V={x:40,y:60,k:1},hist=[],fut=[],editing=false,query='',hits=[],hi=-1,drag=null,pan=null,ed=null,tT=0,sT=0,appHTML='',last={};
+const CSS=`.og{--b0:var(--surface-2,#fff);--b1:var(--surface-1,#f7f7f5);--l1:var(--border,rgba(0,0,0,.12));--l2:var(--border-strong,rgba(0,0,0,.24));--t1:var(--text-primary,#1f1e1d);--t2:var(--text-secondary,#5f5e5a);--ab:var(--bg-accent,#E6F1FB);--at:var(--text-accent,#185FA5);--rd:var(--radius,8px);position:relative;display:flex;flex-direction:column;gap:10px;font-family:var(--font-sans,${XF});font-size:14px;line-height:1.45;color:var(--t1)}
+.og *{box-sizing:border-box}.og [hidden]{display:none!important}.og.full{height:100vh;padding:12px 16px}
+.og button{font:inherit;font-size:13px;height:32px;padding:0 12px;margin:0;border:0.5px solid var(--l2);border-radius:var(--rd);background:transparent;color:var(--t1);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.og button:hover{background:var(--b1)}.og button:active{transform:scale(.98)}.og button.q{border-color:transparent}.og button[aria-pressed=true]{background:var(--ab);color:var(--at)}
+.og button.pri{background:var(--fill-primary,#1f1e1d);color:var(--on-primary,#fff);border-color:transparent}.og button.dg{color:var(--text-danger,#A32D2D)}.og button:focus-visible{outline:2px solid ${AC};outline-offset:1px}
+.og input[type=text],.og input[type=search],.og select,.og textarea{font:inherit;font-size:13px;height:32px;padding:0 10px;margin:0;border:0.5px solid var(--l2);border-radius:var(--rd);background-color:var(--b0);color:var(--t1);width:100%;min-width:0}
+.og textarea{height:auto;padding:8px 10px;font-family:var(--font-mono,monospace);font-size:12px;resize:vertical;margin-top:8px}
+.og input:focus,.og select:focus,.og textarea:focus{outline:none;border-color:${AC};box-shadow:0 0 0 2px var(--ab)}
+.og input[type=checkbox],.og input[type=range]{accent-color:${AC};margin:0}.og input[type=range]{width:100%}
+.og .bar{display:flex;align-items:center;gap:6px}.og .bar .ttl{flex:1;height:36px;font-size:16px;font-weight:500;border-color:transparent;background-color:transparent}
+.og .main{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.og .cv{position:relative;height:500px;border:0.5px solid var(--l1);border-radius:12px;background:var(--b1);overflow:hidden;outline:none}.og .cv:focus-visible{box-shadow:0 0 0 2px var(--ab)}
+.og svg.sv{display:block;width:100%;height:100%;touch-action:none;cursor:grab;user-select:none}.og .nd,.og .pl{cursor:pointer}
+.og .ov{position:absolute;display:flex;align-items:center;gap:4px;z-index:2}.og .ov button{background:var(--b0)}
+.og .srch{top:10px;left:10px;width:min(290px,calc(100% - 20px))}.og .cnt{font-size:12px;color:var(--t2);white-space:nowrap;padding:0 4px}
+.og .zm{right:10px;bottom:10px}.og .zm button{padding:0 10px}
+.og .sb{transform:translateX(-50%);background:var(--b0);border:0.5px solid var(--l2);border-radius:var(--rd);padding:3px;gap:2px}.og .sb button{height:28px;padding:0 9px;border-color:transparent}
+.og .cv .edt{position:absolute;z-index:3;padding:0 6px;border:1px solid ${AC};border-radius:4px}
+.og .tst{left:50%;bottom:54px;transform:translateX(-50%);background:var(--fill-primary,#1f1e1d);color:var(--on-primary,#fff);border-radius:var(--rd);padding:4px 4px 4px 12px;font-size:13px;z-index:4}.og .tst button{color:inherit;background:transparent;border-color:transparent;height:28px}
+.og .emp{inset:0;flex-direction:column;justify-content:center;text-align:center;color:var(--t2);pointer-events:none}.og .emp button{pointer-events:auto}
+.og .side{border:0.5px solid var(--l1);border-radius:12px;background:var(--b0);padding:0 14px 14px;min-width:0}
+.og .tabs{display:flex;gap:4px;border-bottom:0.5px solid var(--l1);margin:0 -14px 14px;padding:0 10px}.og .tabs button{border:none;border-radius:0;height:40px;padding:0 8px;color:var(--t2);background:transparent}.og .tabs button[aria-selected=true]{color:var(--t1);box-shadow:inset 0 -2px 0 var(--t1)}
+.og .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0 14px}
+.og .fl{display:flex;flex-direction:column;gap:4px;margin:0 0 10px;font-size:12px;color:var(--t2)}.og .row{display:flex;align-items:center;gap:6px;margin:0 0 6px}
+.og .h{font-size:13px;font-weight:500;margin:14px 0 6px}.og .hint{font-size:12px;color:var(--t2);margin:0 0 10px}.og .btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.og .ck{display:flex;align-items:center;gap:8px;font-size:13px;margin:0 0 8px;cursor:pointer}.og .sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid}
+.og .seg{display:flex;border:0.5px solid var(--l2);border-radius:var(--rd);padding:2px;gap:2px;margin:0 0 12px}.og .seg button{flex:1;border:none;height:28px;padding:0 6px}
+.og .mw{position:relative}.og .mn{position:absolute;right:0;top:38px;z-index:8;min-width:220px;background:var(--surface-3,#fff);border:0.5px solid var(--l2);border-radius:10px;padding:4px;display:flex;flex-direction:column}.og .mn button{border:none;justify-content:flex-start}.og .mn hr{border:none;border-top:0.5px solid var(--l1);margin:4px 2px}
+.og .md{position:absolute;inset:0;z-index:20;background:rgba(0,0,0,.42);display:flex;align-items:flex-start;justify-content:center;padding:56px 16px;border-radius:12px}.og .dlg{background:var(--b0);border-radius:12px;padding:18px 20px;width:min(540px,100%)}.og .dlg h3{font-size:16px;font-weight:500;margin:0 0 6px}
+.og .msg{font-size:13px;min-height:18px;margin:8px 0 0;color:var(--t2)}.og .msg.err{color:var(--text-danger,#A32D2D)}
+.og kbd{font-family:var(--font-mono,monospace);font-size:11px;padding:1px 5px;border:0.5px solid var(--l2);border-radius:4px;background:var(--b1)}
+@media(min-width:900px){.og .main{grid-template-columns:minmax(0,1fr) 300px}.og.full .main{flex:1;min-height:0}.og.full .cv{height:auto}.og.full .side{overflow:auto}}
+@media(max-width:899px){.og.full{height:auto}.og.full .cv{height:70vh}}`;
+const mi=(a,l)=>`<button role="menuitem" data-a="${a}">${l}</button>`;
+root.innerHTML=`<style>${CSS}<\/style><div class="og${solo?' full':''}"><div class="bar"><input type="text" class="ttl" aria-label="Chart title" placeholder="Name this chart"><button class="q" data-a="undo" title="Undo (Ctrl+Z)"><i class="ti ti-arrow-back-up" aria-hidden="true"></i>Undo</button><button class="q" data-a="redo" title="Redo (Ctrl+Shift+Z)"><i class="ti ti-arrow-forward-up" aria-hidden="true"></i>Redo</button><button data-a="addroot" title="Add a position that reports to no one"><i class="ti ti-plus" aria-hidden="true"></i>Add position</button><div class="mw"><button data-a="menu" aria-haspopup="menu" aria-expanded="false">File<i class="ti ti-chevron-down" aria-hidden="true"></i></button><div class="mn" role="menu" hidden>${mi('new','New blank chart')+mi('tpl','Use company template')}<hr>${mi('import','Import JSON or CSV')+mi('json','Export JSON')+mi('csv','Export CSV')}<hr>${mi('png','Download PNG image')+mi('svg','Download SVG image')}<hr>${mi('app','Save app as HTML file')}</div></div></div>
+<div class="main"><div class="cv" tabindex="0" role="application" aria-label="Organogram canvas. Select a card, then press Tab to add a report, Enter for a peer, F2 to rename, Delete to remove, arrows to move."><svg class="sv" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="og-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" class="dot"></circle></pattern></defs><rect width="100%" height="100%" fill="url(#og-dots)"></rect><g class="vp"></g></svg>
+<div class="ov srch"><input type="search" placeholder="Find a person or title" aria-label="Find a person or title"><span class="cnt"></span></div>
+<div class="ov zm"><button data-a="zout" aria-label="Zoom out">&minus;</button><button data-a="z1" class="pct" title="Reset to 100%">100%</button><button data-a="zin" aria-label="Zoom in">+</button><button data-a="fit" title="Fit to screen (F)">Fit</button></div>
+<div class="ov sb" hidden><button data-a="child" title="Tab">Add report</button><button data-a="peer" title="Enter">Add peer</button><button data-a="rename" title="F2">Rename</button><button data-a="del" class="dg" title="Delete">Delete</button></div>
+<div class="ov emp" hidden><p style="margin:0;font-size:16px;font-weight:500;color:var(--t1)">Start your organogram</p><p style="margin:4px 0 0;font-size:13px">Add the first position, or import people from a spreadsheet.</p><div class="btns" style="justify-content:center"><button data-a="addroot">Add first position</button><button data-a="import">Import data</button></div></div>
+<div class="ov tst" role="status" hidden></div></div>
+<div class="side"><div class="tabs" role="tablist"><button role="tab" data-tab="details">Details</button><button role="tab" data-tab="fields">Fields</button><button role="tab" data-tab="layout">Layout</button></div><div class="pnl"></div></div></div><div class="md" hidden></div></div>`;
+const og=root.querySelector('.og'),$=s=>og.querySelector(s);
+const ttl=$('.ttl'),cv=$('.cv'),sv=$('.sv'),vp=$('.vp'),dot=$('.dot'),pat=$('#og-dots'),srch=$('.srch input'),cnt=$('.cnt'),pct=$('.pct'),sb=$('.sb'),emp=$('.emp'),tst=$('.tst'),pnl=$('.pnl'),md=$('.md'),mn=$('.mn'),mbtn=$('[data-a=menu]');
+const FONT=getComputedStyle(og).fontFamily||XF,mc=document.createElement('canvas').getContext('2d');
+const tw=(t,s,w,f)=>{mc.font=w+' '+s+'px '+f;return mc.measureText(t).width};
+function fitT(t,s,w,max,f){if(tw(t,s,w,f)<=max)return t;let lo=0,h=t.length;while(lo<h){const m=(lo+h+1)>>1;if(tw(t.slice(0,m)+'…',s,w,f)<=max)lo=m;else h=m-1}return t.slice(0,lo).trimEnd()+'…'}
+function dark(){const m=(getComputedStyle(og).color.match(/[\d.]+/g)||[0,0,0]).map(Number);return(0.3*m[0]+0.59*m[1]+0.11*m[2])/255>0.55}
+function pal(c,dk){const r=R[c]||R.gray;return dk?{fill:r[5],st:r[3],av:r[4],avt:r[0],nm:r[1],sub:r[2]}:{fill:r[0],st:r[2],av:r[1],avt:r[5],nm:r[5],sub:r[4]}}
+const deptOf=n=>S.depts.find(d=>d.id===n.dept);
+const label=x=>(x.vacant?'Vacant':(x.name||'Unnamed'))+(x.title?', '+x.title:'');
+const tx0=()=>S.settings.showAv?58:14;
+function lines(n,p){const o=S.settings,d=deptOf(n),L=[{t:n.vacant?'Vacant':(n.name||'Unnamed'),s:14,w:500,c:n.vacant||!n.name?p.sub:p.nm,h:18}];if(o.showTitle)L.push({t:n.title,s:12,w:400,c:p.sub,h:16});if(o.showDept)L.push({t:d?d.name:'',s:12,w:400,c:p.sub,h:16});S.fields.forEach(f=>f.show&&L.push({t:n.f[f.id]||'',s:12,w:400,c:p.sub,h:16}));return L}
+function index(){byId=NS();kids=NS();S.nodes.forEach(n=>byId[n.id]=n);S.nodes.forEach(n=>{if(n.parent&&!byId[n.parent])n.parent=null;(kids[n.parent||'']=kids[n.parent||'']||[]).push(n.id)})}
+const kof=id=>kids[id]||[];
+const desc=(id,a=[])=>{kof(id).forEach(k=>{a.push(k);desc(k,a)});return a};
+function layout(){const o=S.settings,tb=o.orient=='tb',W=o.cardW;H=Math.max(lines({f:{}},{}).reduce((a,l)=>a+l.h,0)+24,o.showAv?60:0);
+const bs=tb?W:H,ds=tb?H:W,gb=o.gapX,gd=o.gapY,sp=NS();box=NS();
+const vis=id=>byId[id].collapsed?[]:kof(id),stk=id=>{const c=vis(id);return tb&&o.stack&&c.length>1&&c.every(k=>!kof(k).length)};
+const put=(id,b,d,x)=>box[id]=Object.assign({x:Math.round(tb?b:d),y:Math.round(tb?d:b)},x);
+const ms=id=>{const c=vis(id);if(!c.length)return sp[id]=bs;if(stk(id))return sp[id]=W+24;let t=0;c.forEach((k,i)=>t+=ms(k)+(i?gb:0));return sp[id]=Math.max(bs,t)};
+const mid=id=>tb?box[id].x+W/2:box[id].y+H/2;
+const pl=(id,b0,d0)=>{const c=vis(id);if(!c.length)return put(id,b0+(sp[id]-bs)/2,d0);
+if(stk(id)){put(id,b0,d0,{stack:1});c.forEach((k,i)=>put(k,b0+24,d0+H+gd/2+i*(H+10),{inS:1}));return}
+let t=0;c.forEach((k,i)=>t+=sp[k]+(i?gb:0));let b=b0+(sp[id]-t)/2;c.forEach(k=>{pl(k,b,d0+ds+gd);b+=sp[k]+gb});put(id,(mid(c[0])+mid(c[c.length-1]))/2-bs/2,d0)};
+let b=0;kof('').forEach(r=>{ms(r);pl(r,b,0);b+=sp[r]+gb*2})}
+function path(x1,y1,x2,y2,tb){const o=S.settings,g=o.gapY/2;if(o.link=='straight')return`M${x1} ${y1}L${x2} ${y2}`;
+if(!tb){const p=path(y1,x1,y2,x2,true);return p.replace(/([MLVHCQ])([^MLVHCQ]*)/g,(m,c,a)=>{const n=a.trim().split(' ');if(c=='V')return'H'+n[0];if(c=='H')return'V'+n[0];for(let i=0;i<n.length;i+=2){const t=n[i];n[i]=n[i+1];n[i+1]=t}return c+n.join(' ')})}
+const m=y1+g;if(o.link=='curve')return`M${x1} ${y1}C${x1} ${m} ${x2} ${m} ${x2} ${y2}`;const dx=x2-x1;if(Math.abs(dx)<1)return`M${x1} ${y1}V${y2}`;const s=dx>0?1:-1,r=Math.min(8,Math.abs(dx)/2,g);
+return`M${x1} ${y1}V${m-r}Q${x1} ${m} ${x1+s*r} ${m}H${x2-s*r}Q${x2} ${m} ${x2} ${m+r}V${y2}`}
+function card(n,dk,f){const W=S.settings.cardW,d=deptOf(n),p=pal(d?d.color:'gray',dk),L=lines(n,p),th=L.reduce((a,l)=>a+l.h,0),x=tx0();let y=(H-th)/2;
+let s=`<title>${esc(label(n))}</title><rect width="${W}" height="${H}" rx="8" fill="${p.fill}" stroke="${n.vacant?p.sub:p.st}"${n.vacant?' stroke-dasharray="5 4"':''}/>`;
+if(S.settings.showAv)s+=n.vacant?`<circle cx="30" cy="${H/2}" r="17" fill="none" stroke="${p.sub}" stroke-dasharray="3 3"/>`:`<circle cx="30" cy="${H/2}" r="18" fill="${p.av}"/><text x="30" y="${H/2+4.5}" text-anchor="middle" font-size="13" font-weight="500" fill="${p.avt}">${esc(n.name.trim().split(/\s+/).filter(Boolean).map((w,i,a)=>i==0||i==a.length-1?w[0]:'').join('').slice(0,2).toUpperCase())}</text>`;
+L.forEach(l=>{if(l.t)s+=`<text x="${x}" y="${(y+(l.h+l.s*.7)/2).toFixed(1)}" font-size="${l.s}" font-weight="${l.w}" fill="${l.c}">${esc(fitT(l.t,l.s,l.w,W-x-12,f))}</text>`;y+=l.h});return s}
+function draw(dk,ex,f){const o=S.settings,tb=o.orient=='tb',W=o.cardW,lc=dk?'#5F5E5A':'#B4B2A9',hs=query&&!ex?new Set(hits):null;let L='',N='',P='';
+for(const id in box){const n=byId[id],b=box[id],c=n.collapsed?[]:kof(id);
+if(b.stack){const sx=b.x+12;L+=`<path d="M${sx} ${b.y+H}V${box[c[c.length-1]].y+H/2}"/>`;c.forEach(k=>L+=`<path d="M${sx} ${box[k].y+H/2}H${box[k].x}"/>`)}
+else c.forEach(k=>{const q=box[k];L+=`<path d="${tb?path(b.x+W/2,b.y+H,q.x+W/2,q.y,1):path(b.x+W,b.y+H/2,q.x,q.y+H/2,0)}"/>`});
+const ring=ex?'':id===sel?AC:hs&&hs.has(id)?'#EF9F27':'';
+N+=`<g class="nd" data-id="${esc(id)}" transform="translate(${b.x},${b.y})"${hs&&!hs.has(id)?' opacity=".35"':''}>${card(n,dk,f)}${ring?`<rect x="-3" y="-3" width="${W+6}" height="${H+6}" rx="10" fill="none" stroke="${ring}" stroke-width="2"/>`:''}</g>`;
+const k=kof(id).length;if(!ex&&o.showCount&&k){const w=k>9?24:18;P+=`<g class="pl" data-pill="${esc(id)}" transform="translate(${tb?b.x+W/2:b.x+W},${tb?b.y+H:b.y+H/2})"><title>${n.collapsed?'Show':'Hide'} ${k} direct report${k>1?'s':''}</title><rect x="${-w/2}" y="-9" width="${w}" height="18" rx="9" ${n.collapsed?'fill="#185FA5" stroke="#185FA5"':`style="fill:var(--b0)" stroke="${lc}"`}/><text y="4" text-anchor="middle" font-size="11" font-weight="500" fill="${n.collapsed?'#fff':dk?'#D3D1C7':'#5F5E5A'}">${k}</text></g>`}}
+return`<g fill="none" stroke="${lc}" stroke-width="1.25">${L}</g>${N}${P}`}
+function render(){index();layout();const dk=dark();vp.innerHTML=draw(dk,0,FONT);dot.setAttribute('fill',dk?'#444441':'#D3D1C7');emp.hidden=S.nodes.length>0;view()}
+function view(){vp.setAttribute('transform',`translate(${V.x},${V.y}) scale(${V.k})`);pat.setAttribute('patternTransform',`translate(${V.x},${V.y}) scale(${Math.max(V.k,.5)})`);pct.textContent=Math.round(V.k*100)+'%';selBar()}
+function selBar(){const b=sel&&box[sel];if(!b||ed||(drag&&drag.mv)||(pan&&pan.mv)||!md.hidden){sb.hidden=true;return}const W=S.settings.cardW,k=V.k,x1=b.x*k+V.x,y1=b.y*k+V.y;
+if(x1+W*k<0||x1>cv.clientWidth||y1+H*k<0||y1>cv.clientHeight){sb.hidden=true;return}sb.hidden=false;const hw=sb.offsetWidth/2;let y=y1-42;if(y<48)y=y1+H*k+14;
+sb.style.left=Math.max(hw+8,Math.min(cv.clientWidth-hw-8,x1+W*k/2))+'px';sb.style.top=y+'px'}
+function bounds(){let a=1e9,b=1e9,c=-1e9,d=-1e9;const W=S.settings.cardW;for(const id in box){const q=box[id];a=Math.min(a,q.x);b=Math.min(b,q.y);c=Math.max(c,q.x+W);d=Math.max(d,q.y+H)}return a>c?{x:0,y:0,w:0,h:0}:{x:a,y:b,w:c-a+10,h:d-b+10}}
+function fit(){const r=bounds(),cw=cv.clientWidth,ch=cv.clientHeight;if(!r.w){V={x:40,y:60,k:1};return view()}const k=Math.max(.15,Math.min(1,(cw-48)/r.w,(ch-110)/r.h));V={k,x:(cw-r.w*k)/2-r.x*k,y:56+Math.max(0,(ch-110-r.h*k)/2)-r.y*k};view()}
+function zoom(f,cx,cy){closeEd(1);const k=Math.min(2.5,Math.max(.15,V.k*f));if(cx==null){cx=cv.clientWidth/2;cy=cv.clientHeight/2}V.x=cx-(cx-V.x)*k/V.k;V.y=cy-(cy-V.y)*k/V.k;V.k=k;view()}
+function center(id){const b=box[id];if(!b)return;V.x=cv.clientWidth/2-(b.x+S.settings.cardW/2)*V.k;V.y=cv.clientHeight/2-(b.y+H/2)*V.k;view()}
+function reveal(id){const b=box[id],k=V.k;if(!b)return;const x=b.x*k+V.x,y=b.y*k+V.y;if(x<16||y<52||x+S.settings.cardW*k>cv.clientWidth-16||y+H*k>cv.clientHeight-52)center(id)}
+function save(){clearTimeout(sT);sT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300)}
+function commit(){render();side();save()}
+function snap(){hist.push(JSON.stringify(S));if(hist.length>150)hist.shift();fut=[]}
+function begin(){if(!editing){snap();editing=true}}
+function restore(a,b){closeEd(0);if(!a.length)return toast('Nothing to '+(a===hist?'undo':'redo'));b.push(JSON.stringify(S));S=JSON.parse(a.pop());index();if(sel&&!byId[sel])sel=null;tst.hidden=true;ttl.value=S.title;commit()}
+function toast(m,u){tst.innerHTML=`<span>${esc(m)}</span>${u?'<button data-a="undo">Undo</button>':''}`;tst.hidden=false;clearTimeout(tT);tT=setTimeout(()=>tst.hidden=true,u?6000:3000)}
+function add(parent,after){closeEd(1);snap();const p=parent&&byId[parent],a=after&&byId[after];const n={id:uid(),parent:p?p.id:null,name:'',title:'',dept:a?a.dept:p?p.dept:'',f:{},vacant:false,collapsed:false};
+if(a)S.nodes.splice(S.nodes.indexOf(a)+1,0,n);else S.nodes.push(n);if(p)p.collapsed=false;sel=n.id;commit();reveal(n.id);openEd(n.id,'name')}
+function remove(id,team){const n=byId[id];if(!n)return;snap();const k=kof(id).length;if(team){const x=new Set([id,...desc(id)]);S.nodes=S.nodes.filter(m=>!x.has(m.id))}else{S.nodes.forEach(m=>{if(m.parent===id)m.parent=n.parent});S.nodes=S.nodes.filter(m=>m!==n)}
+sel=n.parent;commit();toast(`Deleted ${n.name||'position'}${team&&k?' and team':k?', reports moved up':''}`,1)}
+function move(id,np,t){const n=byId[id];if(!n)return;np=np||null;if(np&&(np===id||desc(id).includes(np)))return toast("A position can't report to someone in its own team");snap();n.parent=np;S.nodes.splice(S.nodes.indexOf(n),1);S.nodes.push(n);if(np)byId[np].collapsed=false;sel=id;commit();if(t)toast(`Moved ${n.name||'position'} under ${np?byId[np].name||'position':'top level'}`,1)}
+function shift(id,d){const n=byId[id],s=kof(n.parent||''),j=s.indexOf(id)+d;if(j<0||j>=s.length)return;snap();const a=S.nodes.indexOf(n),b=S.nodes.indexOf(byId[s[j]]);S.nodes[a]=S.nodes[b];S.nodes[b]=n;commit()}
+function collapse(id){const n=byId[id];n.collapsed=!n.collapsed;if(n.collapsed&&desc(id).includes(sel))sel=id;commit()}
+function openEd(id,fld){closeEd(1);const n=byId[id],b=box[id];if(!n||!b)return;if(fld=='title'&&!S.settings.showTitle)fld='name';reveal(id);
+const th=lines(n,{}).reduce((a,l)=>a+l.h,0),k=V.k,x=tx0(),lh=fld=='name'?18:16,fs=Math.max(12,(fld=='name'?14:12)*k),hh=Math.max(fs+12,(lh+8)*k);
+const i=document.createElement('input');i.type='text';i.className='edt';i.value=n[fld];i.placeholder=fld=='name'?'Full name':'Job title';i.setAttribute('aria-label',i.placeholder);
+Object.assign(i.style,{left:(b.x+x-6)*k+V.x+'px',top:(b.y+(H-th)/2+(fld=='name'?0:18)+lh/2)*k+V.y-hh/2+'px',width:Math.max(150,(S.settings.cardW-x)*k)+'px',height:hh+'px',fontSize:fs+'px',fontWeight:fld=='name'?500:400});
+cv.appendChild(i);ed={id,fld,i,o:i.value};sb.hidden=true;i.focus({preventScroll:true});i.select();
+i.onkeydown=e=>{e.stopPropagation();if(e.key=='Enter'||e.key=='Escape'){e.preventDefault();closeEd(e.key=='Enter');cv.focus({preventScroll:true})}else if(e.key=='Tab'){e.preventDefault();const nx=!e.shiftKey&&fld=='name'?'title':e.shiftKey&&fld=='title'?'name':0;closeEd(1);nx?openEd(id,nx):cv.focus({preventScroll:true})}};
+i.onblur=()=>{if(ed&&ed.i===i)closeEd(1)}}
+function closeEd(keep){if(!ed)return;const e=ed;ed=null;e.i.remove();if(keep&&e.i.value!==e.o&&byId[e.id]){snap();byId[e.id][e.fld]=e.i.value;commit()}else selBar()}
+function side(){og.querySelectorAll('[data-tab]').forEach(b=>b.closest('.tabs')&&b.setAttribute('aria-selected',b.dataset.tab==tab));pnl.innerHTML=tab=='details'?details():tab=='fields'?fieldsTab():layoutTab()}
+function details(){const n=sel&&byId[sel];
+if(!n){const keys=[['Tab','Add a report'],['Enter','Add a peer'],['F2','Rename, or double-click'],['Del','Delete, team moves up'],['Arrows','Move between cards'],['Alt + arrows','Reorder peers'],['Space','Show or hide team'],['Ctrl + Z','Undo'],['F','Fit to screen'],['/','Search']];
+return`<p class="hint">${S.nodes.length} positions, ${S.nodes.filter(x=>x.vacant).length} vacant. Select a card to edit it, or drag a card onto another to change who it reports to. Hold Ctrl and scroll to zoom; drag empty space to pan.</p><div class="btns" style="margin:0 0 6px"><button data-a="addroot">Add top-level position</button><button data-a="import">Import data</button></div><p class="h">Keyboard shortcuts, with a card selected</p><div class="cols" style="gap:6px 14px;font-size:12px;color:var(--t2)">${keys.map(k=>`<div><kbd>${k[0]}</kbd> ${k[1]}</div>`).join('')}</div>`}
+const ds=new Set(desc(sel)),k=kof(sel).length,inp=(l,a,v,ph)=>`<label class="fl">${esc(l)}<input type="text" ${a} value="${esc(v)}" placeholder="${ph||''}"></label>`;
+return`<div class="cols">${inp('Name','data-k="name"',n.name,'Jordan Lee')+inp('Job title','data-k="title"',n.title,'Head of finance')}<label class="fl">Department<select data-k="dept"><option value="">No department</option>${S.depts.map(d=>`<option value="${esc(d.id)}"${d.id==n.dept?' selected':''}>${esc(d.name||'Untitled')}</option>`).join('')}</select></label><label class="fl">Reports to<select data-k="parent"><option value="">No one (top level)</option>${S.nodes.filter(x=>x.id!=sel&&!ds.has(x.id)).map(x=>`<option value="${esc(x.id)}"${x.id==n.parent?' selected':''}>${esc(label(x))}</option>`).join('')}</select></label>${S.fields.map(f=>inp(f.label||'Untitled field',`data-f="${esc(f.id)}"`,n.f[f.id]||'')).join('')}</div>
+<label class="ck"><input type="checkbox" data-k="vacant"${n.vacant?' checked':''}>Vacant position</label><p class="hint">${k?`${k} direct report${k>1?'s':''}, ${ds.size} in team.`:'No reports yet.'}</p>
+<div class="btns"><button data-a="child">Add report</button><button data-a="peer">Add peer</button><button data-a="up">Move earlier</button><button data-a="down">Move later</button></div><div class="btns"><button class="dg" data-a="del">Delete position</button>${k?'<button class="dg" data-a="delteam">Delete with team</button>':''}</div>`}
+function fieldsTab(){const dk=dark(),x='style="width:32px;padding:0;flex:none"';return`<div class="cols" style="gap:0 24px"><div><p class="h" style="margin-top:0">Departments</p><p class="hint">Cards take the color of their department.</p>${S.depts.map(d=>{const p=pal(d.color,dk);return`<div class="row"><span class="sw" data-sw="${esc(d.id)}" style="background:${p.fill};border-color:${p.st}"></span><input type="text" data-dn="${esc(d.id)}" value="${esc(d.name)}" aria-label="Department name"><select data-dc="${esc(d.id)}" aria-label="Color" style="width:92px;flex:none">${COLORS.map(c=>`<option value="${c}"${c==d.color?' selected':''}>${c[0].toUpperCase()+c.slice(1)}</option>`).join('')}</select><button class="q" data-a="deldept" data-id="${esc(d.id)}" aria-label="Remove department" ${x}>&times;</button></div>`}).join('')}<button data-a="adddept">Add department</button></div>
+<div><p class="h" style="margin-top:0">Custom fields</p><p class="hint">Store details like email or employee ID. Tick a field to show it on cards.</p>${S.fields.map(f=>`<div class="row"><input type="text" data-fn="${esc(f.id)}" value="${esc(f.label)}" aria-label="Field name"><label class="ck" style="margin:0;flex:none;font-size:12px"><input type="checkbox" data-fs="${esc(f.id)}"${f.show?' checked':''}>On card</label><button class="q" data-a="delfield" data-id="${esc(f.id)}" aria-label="Remove field" ${x}>&times;</button></div>`).join('')}<button data-a="addfield">Add field</button></div></div>`}
+function layoutTab(){const o=S.settings,seg=(k,a)=>`<div class="seg">${a.map(v=>`<button data-a="set" data-s="${k}" data-v="${v[0]}" aria-pressed="${o[k]==v[0]}">${v[1]}</button>`).join('')}</div>`,
+rg=(k,l,a,b,st)=>`<label class="fl"><span style="display:flex;justify-content:space-between">${l}<span data-out="${k}">${o[k]} px</span></span><input type="range" data-s="${k}" min="${a}" max="${b}" step="${st}" value="${o[k]}"></label>`,ck=(k,l)=>`<label class="ck"><input type="checkbox" data-s="${k}"${o[k]?' checked':''}>${l}</label>`;
+return`<div class="cols" style="gap:0 24px"><div><p class="h" style="margin-top:0">Direction</p>${seg('orient',[['tb','Top to bottom'],['lr','Left to right']])}<p class="h" style="margin-top:0">Connectors</p>${seg('link',[['elbow','Elbow'],['curve','Curved'],['straight','Straight']])}${rg('cardW','Card width',150,320,10)+rg('gapX','Space between peers',8,96,4)+rg('gapY','Space between levels',24,140,4)}</div>
+<div><p class="h" style="margin-top:0">Show on cards</p>${ck('showAv','Initials')+ck('showTitle','Job title')+ck('showDept','Department name')+ck('showCount','Team size button')}<p class="h">Arrangement</p>${ck('stack','Stack teams with no sub-teams')}<div class="btns"><button data-a="fit">Fit chart to screen</button></div></div></div>`}
+pnl.addEventListener('input',e=>{const t=e.target,d=t.dataset,n=byId[sel];
+if((d.k=='name'||d.k=='title')&&n){begin();n[d.k]=t.value}else if(d.f&&n){begin();n.f[d.f]=t.value}
+else if(d.dn){begin();S.depts.find(x=>x.id==d.dn).name=t.value}else if(d.fn){begin();S.fields.find(x=>x.id==d.fn).label=t.value}
+else if(t.type=='range'){begin();S.settings[d.s]=+t.value;pnl.querySelector(`[data-out=${d.s}]`).textContent=t.value+' px'}else return;render();save()});
+pnl.addEventListener('change',e=>{const t=e.target,d=t.dataset,n=byId[sel];if(t.type=='range'){editing=false;return}
+if(d.k=='parent')return move(sel,t.value);if(t.type=='text')return;snap();
+if(d.k=='dept')n.dept=t.value;else if(d.k=='vacant')n.vacant=t.checked;else if(d.fs)S.fields.find(x=>x.id==d.fs).show=t.checked;else if(d.s)S.settings[d.s]=t.checked;
+else if(d.dc){const x=S.depts.find(x=>x.id==d.dc),p=pal(x.color=t.value,dark()),w=[...pnl.querySelectorAll('[data-sw]')].find(s=>s.dataset.sw==x.id);if(w){w.style.background=p.fill;w.style.borderColor=p.st}}render();save()});
+og.addEventListener('focusout',()=>editing=false);
+ttl.addEventListener('input',()=>{begin();S.title=ttl.value;if(solo)document.title=S.title;save()});
+function act(a,el){const n=byId[sel];switch(a){
+case'undo':return restore(hist,fut);case'redo':return restore(fut,hist);case'addroot':return add(null);
+case'menu':mn.hidden=!mn.hidden;mbtn.setAttribute('aria-expanded',!mn.hidden);return;
+case'new':return replace(blank(),'Started a blank chart');case'tpl':return replace(company(),'Loaded the company template');
+case'import':return importDlg();case'json':return textDlg('Export JSON','JSON keeps everything, including colors and layout. Import it later to continue.',JSON.stringify(S,null,2),fname()+'.json','application/json');
+case'csv':return textDlg('Export CSV','Opens in any spreadsheet app. You can edit it and import it back.',toCSV(),fname()+'.csv','text/csv');
+case'png':return png();case'svg':return S.nodes.length?dl(fname()+'.svg',new Blob([exp().svg],{type:'image/svg+xml'})):toast('Add a position first');
+case'app':appHTML=buildApp();return textDlg('Save app as HTML file','One file that runs in any modern browser with no install. It opens with this chart, and your edits save automatically in that browser.',appHTML,fname()+'.html','text/html');
+case'child':return n&&add(sel);case'peer':return n&&add(n.parent,sel);case'rename':return n&&openEd(sel,'name');case'del':return n&&remove(sel);case'delteam':return n&&remove(sel,1);
+case'up':return n&&shift(sel,-1);case'down':return n&&shift(sel,1);case'zin':return zoom(1.2);case'zout':return zoom(1/1.2);case'z1':return zoom(1/V.k);case'fit':return fit();
+case'set':if(S.settings[el.dataset.s]==el.dataset.v)return;snap();S.settings[el.dataset.s]=el.dataset.v;commit();return el.dataset.s=='orient'&&fit();
+case'adddept':{snap();const u=S.depts.map(d=>d.color);S.depts.push({id:'d'+uid(),name:'New department',color:COLORS.find(c=>!u.includes(c))||'gray'});commit();const i=[...pnl.querySelectorAll('[data-dn]')].pop();i.focus();i.select();return}
+case'deldept':snap();S.nodes.forEach(m=>{if(m.dept==el.dataset.id)m.dept=''});S.depts=S.depts.filter(d=>d.id!=el.dataset.id);commit();return toast('Department removed',1);
+case'addfield':{snap();S.fields.push({id:'f'+uid(),label:'New field',show:false});commit();const i=[...pnl.querySelectorAll('[data-fn]')].pop();i.focus();i.select();return}
+case'delfield':snap();S.fields=S.fields.filter(f=>f.id!=el.dataset.id);commit();return toast('Field removed',1);
+case'close':return closeMd();case'doimport':return doImport();
+case'copy':return copy();case'dl':return dl(md.dataset.fn,new Blob([md.querySelector('textarea').value],{type:md.dataset.type}))}}
+function replace(ns,m){closeEd(0);snap();ns.id=S.id;S=ns;sel=null;query=srch.value='';cnt.textContent='';ttl.value=S.title;commit();fit();toast(m,1)}
+const fname=()=>(S.title||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'organogram';
+function dl(name,blob){try{const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);note('Saving '+name+'. If no file appears, use Copy instead.')}catch(e){note('This page blocked the download. Use Copy instead.')}}
+function note(m,err){const s=!md.hidden&&md.querySelector('.msg');if(s){s.textContent=m;s.classList.toggle('err',!!err)}else toast(m)}
+function openMd(h){mn.hidden=true;closeEd(1);md.innerHTML=`<div class="dlg" role="dialog" aria-modal="true" aria-label="Dialog">${h}<p class="msg" role="status"></p></div>`;md.hidden=false;sb.hidden=true;const f=md.querySelector('textarea:not([readonly]),.pri');if(f)f.focus()}
+function closeMd(){md.hidden=true;md.innerHTML='';selBar();cv.focus({preventScroll:true})}
+function textDlg(t,h,body,fn,type){md.dataset.fn=fn;md.dataset.type=type;openMd(`<h3>${t}</h3><p class="hint">${h}</p><textarea rows="8" readonly aria-label="${t}">${esc(body)}</textarea><div class="btns" style="justify-content:flex-end"><button data-a="close">Close</button><button data-a="copy">Copy</button><button class="pri" data-a="dl">Download ${esc(fn)}</button></div>`)}
+function copy(){const ta=md.querySelector('textarea'),ok=()=>note('Copied to clipboard'),fb=()=>{ta.focus();ta.select();let r=false;try{r=document.execCommand('copy')}catch(e){}r?ok():note('Copying is blocked here. The text is selected, so copy it with your keyboard.',1)};navigator.clipboard?navigator.clipboard.writeText(ta.value).then(ok,fb):fb()}
+function importDlg(){openMd(`<h3>Import data</h3><p class="hint">Paste JSON exported from this app, or rows copied from a spreadsheet or CSV file. Recognized columns: id, name, title, manager (a name or id) and department. Any other column becomes a custom field.</p><input type="file" accept=".json,.csv,.tsv,.txt" aria-label="Choose a file"><textarea rows="8" aria-label="Data to import" placeholder="name,title,manager,department&#10;Sara Lindqvist,Chief executive officer,,Leadership&#10;Daniel Okafor,Chief technology officer,Sara Lindqvist,Engineering"></textarea><div class="btns" style="justify-content:flex-end"><button data-a="close">Cancel</button><button class="pri" data-a="doimport">Replace chart</button></div>`);
+const fi=md.querySelector('input[type=file]'),ta=md.querySelector('textarea');ta.oninput=()=>note('');fi.onchange=()=>{const f=fi.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{ta.value=r.result;note('')};r.onerror=()=>note("That file couldn't be read. Paste its contents instead.",1);r.readAsText(f)}}
+function doImport(){const t=md.querySelector('textarea').value.trim();if(!t)return note('Paste data or choose a file first.',1);let ns;
+try{if(t[0]=='{'||t[0]=='['){let d=JSON.parse(t);if(Array.isArray(d))d={nodes:d};if(!d.nodes)throw'JSON needs a "nodes" list.';ns=norm(d)}else ns=fromCSV(t)}catch(e){return note(typeof e=='string'?e:"That data couldn't be read. Check it's valid JSON or CSV.",1)}
+if(!ns.nodes.length)return note('No people found. Check the header row has a name or title column.',1);closeMd();replace(ns,`Imported ${ns.nodes.length} positions`)}
+function parse(t){const f=t.split(/\r?\n/)[0],c=s=>(f.match(s)||[]).length,dl=c(/\t/g)>c(/,/g)?'\t':c(/;/g)>c(/,/g)?';':',',rows=[];let row=[],cell='',q=false;
+for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){cell+='"';i++}else q=false}else cell+=ch}else if(ch=='"'&&!cell)q=true;else if(ch==dl){row.push(cell);cell=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;row.push(cell);rows.push(row);row=[];cell=''}else cell+=ch}
+row.push(cell);rows.push(row);return rows.filter(r=>r.some(x=>x.trim()))}
+function fromCSV(t){const rows=parse(t);if(rows.length<2)throw'Add a header row and at least one person.';const hd=rows[0].map(h=>h.trim()),lo=hd.map(h=>h.toLowerCase().replace(/[^a-z]/g,'')),fd=a=>lo.findIndex(h=>a.includes(h));
+const I={id:fd(['id','employeeid','empid','staffid']),nm:fd(['name','fullname','employee','employeename']),fn:fd(['firstname','givenname']),ln:fd(['lastname','surname']),ti:fd(['title','jobtitle','position','designation','role']),mi:fd(['managerid','parentid','reportstoid']),mn:fd(['manager','reportsto','parent','supervisor','linemanager','managername']),dp:fd(['department','dept','team','division','unit']),va:fd(['vacant'])};
+if(I.nm<0&&I.ti<0&&I.fn<0)throw'Add a header row with a name or title column.';const used=Object.values(I),ex=hd.map((h,i)=>i).filter(i=>!used.includes(i)&&hd[i]),fields=ex.map(i=>({id:'f'+uid(),label:hd[i]})),depts=[],dm=NS();
+const ns=rows.slice(1).map((r,ri)=>{const g=i=>i<0?'':(r[i]||'').trim(),dn=g(I.dp);let dept='';if(dn){const k=dn.toLowerCase();if(!dm[k]){dm[k]={id:'d'+uid(),name:dn,color:COLORS[depts.length%COLORS.length]};depts.push(dm[k])}dept=dm[k].id}
+const f={};ex.forEach((i,j)=>{if(g(i))f[fields[j].id]=g(i)});return{id:g(I.id)||'r'+ri+uid(),name:g(I.nm)||[g(I.fn),g(I.ln)].filter(Boolean).join(' '),title:g(I.ti),dept,f,vacant:/^(y|yes|true|1)$/i.test(g(I.va)),m:g(I.mi)||g(I.mn)}});
+const bi=NS(),bn=NS();ns.forEach(n=>{bi[n.id]=n;const k=n.name.toLowerCase();if(k&&!bn[k])bn[k]=n});ns.forEach(n=>{const p=bi[n.m]||bn[n.m.toLowerCase()];n.parent=p&&p!==n?p.id:null});
+return norm({title:S.title,settings:S.settings,depts,fields,nodes:ns})}
+function toCSV(){const c=v=>(v=String(v==null?'':v),/[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v);return[['id','name','title','manager_id','manager','department','vacant',...S.fields.map(f=>f.label)],...S.nodes.map(n=>{const p=byId[n.parent],d=deptOf(n);return[n.id,n.name,n.title,n.parent||'',p?p.name:'',d?d.name:'',n.vacant?'yes':'',...S.fields.map(f=>n.f[f.id]||'')]})].map(r=>r.map(c).join(',')).join('\n')}
+function exp(){const r=bounds(),p=32,th=S.title?40:0,w=Math.ceil(r.w+p*2),h=Math.ceil(r.h+p*2+th),body=draw(false,1,XF);return{w,h,svg:`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" font-family="${XF}"><rect width="${w}" height="${h}" fill="#fff"/>${S.title?`<text x="${p}" y="${p+18}" font-size="20" font-weight="500" fill="#1f1e1d">${esc(S.title)}</text>`:''}<g transform="translate(${p-r.x},${p+th-r.y})">${body}</g></svg>`}}
+function png(){if(!S.nodes.length)return toast('Add a position first');const e=exp(),s=Math.min(2,16000/e.w,16000/e.h),img=new Image(),bad=()=>toast("The image couldn't be created. Try SVG instead.");
+img.onload=()=>{const c=document.createElement('canvas');c.width=e.w*s;c.height=e.h*s;const x=c.getContext('2d');x.scale(s,s);x.drawImage(img,0,0);c.toBlob(b=>b?dl(fname()+'.png',b):bad())};img.onerror=bad;img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(e.svg)}
+function buildApp(){const d=JSON.stringify(Object.assign({},S,{id:uid()})).replace(/</g,'\\u003c');return'<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>'+esc(S.title||'Organogram')+'</title>\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">\n<style>html,body{margin:0;background:#fff}</style>\n</head>\n<body>\n<div id="og-root"></div>\n<script>\n'+OrgApp.toString()+'\nOrgApp('+d+');\n<\/script>\n</body>\n</html>\n'}
+function search(){query=srch.value.trim().toLowerCase();hi=-1;hits=query?S.nodes.filter(n=>{const d=deptOf(n);return[n.name,n.title,d?d.name:'',...Object.values(n.f)].join(' ').toLowerCase().includes(query)}).map(n=>n.id):[];cnt.textContent=query?(hits.length?hits.length+' found':'No matches'):'';render()}
+srch.addEventListener('input',search);
+srch.addEventListener('keydown',e=>{if(e.key=='Enter'&&hits.length){e.preventDefault();hi=(hi+(e.shiftKey?-1:1)+hits.length)%hits.length;const id=hits[hi];let p=byId[id].parent;while(p){byId[p].collapsed=false;p=byId[p].parent}sel=id;commit();center(id);cnt.textContent=`${hi+1} of ${hits.length}`}else if(e.key=='Escape'){srch.value='';search();cv.focus()}});
+const pt=e=>{const r=sv.getBoundingClientRect();return{x:(e.clientX-r.left-V.x)/V.k,y:(e.clientY-r.top-V.y)/V.k}};
+sv.addEventListener('pointerdown',e=>{if(e.button||e.target.closest('[data-pill]'))return;const g0=e.target.closest('.nd'),id=g0&&g0.dataset.id;closeEd(1);mn.hidden=true;cv.focus({preventScroll:true});
+const g=id&&[...vp.querySelectorAll('.nd')].find(x=>x.dataset.id===id);if(id)drag={id,g,sx:e.clientX,sy:e.clientY};else pan={sx:e.clientX,sy:e.clientY,x:V.x,y:V.y};try{sv.setPointerCapture(e.pointerId)}catch(x){}});
+sv.addEventListener('pointermove',e=>{const o=pan||drag;if(!o)return;const dx=e.clientX-o.sx,dy=e.clientY-o.sy;if(!o.mv){if(Math.abs(dx)+Math.abs(dy)<6)return;o.mv=1;sb.hidden=true;if(drag){vp.appendChild(drag.g);drag.g.setAttribute('opacity','.75');drag.bad=new Set([drag.id,...desc(drag.id)])}}
+if(pan){V.x=pan.x+dx;V.y=pan.y+dy;return view()}const b=box[drag.id],p=pt(e),W=S.settings.cardW;drag.g.setAttribute('transform',`translate(${b.x+dx/V.k},${b.y+dy/V.k})`);let t=null;for(const id in box){const q=box[id];if(!drag.bad.has(id)&&p.x>=q.x&&p.x<=q.x+W&&p.y>=q.y&&p.y<=q.y+H){t=id;break}}
+if(t!==drag.t){drag.t=t;const old=vp.querySelector('.drop');if(old)old.remove();if(t){const q=box[t];vp.insertAdjacentHTML('afterbegin',`<rect class="drop" x="${q.x-5}" y="${q.y-5}" width="${W+10}" height="${H+10}" rx="12" fill="none" stroke="${AC}" stroke-width="2" stroke-dasharray="6 4"/>`)}}});
+function up(e,cancel){if(pan){const p=pan;pan=null;if(!p.mv&&!cancel&&sel){sel=null;commit()}else selBar();return}if(!drag)return;const d=drag;drag=null;
+if(d.mv)return!cancel&&d.t&&d.t!==byId[d.id].parent?move(d.id,d.t,1):render();if(cancel)return;const now=Date.now();
+if(last.id===d.id&&now-last.t<400){last={};return openEd(d.id,'name')}last={id:d.id,t:now};if(sel!==d.id){sel=d.id;tab='details';commit()}}
+sv.addEventListener('pointerup',e=>up(e));sv.addEventListener('pointercancel',e=>up(e,1));
+sv.addEventListener('wheel',e=>{if(e.ctrlKey||e.metaKey){e.preventDefault();const r=sv.getBoundingClientRect();zoom(Math.exp(-e.deltaY*.0015),e.clientX-r.left,e.clientY-r.top)}else if(solo){e.preventDefault();V.x-=e.deltaX;V.y-=e.deltaY;view()}},{passive:false});
+og.addEventListener('click',e=>{const p=e.target.closest('[data-pill]');if(p)return collapse(p.dataset.pill);const t=e.target.closest('[data-tab]');if(t){tab=t.dataset.tab;return side()}const b=e.target.closest('[data-a]');if(!b)return;if(b.closest('.mn'))mn.hidden=true;act(b.dataset.a,b);if(b.closest('.sb')&&!ed)cv.focus({preventScroll:true})});
+document.addEventListener('pointerdown',e=>{if(!mn.hidden&&!e.target.closest('.mw'))mn.hidden=true},true);
+md.addEventListener('pointerdown',e=>{if(e.target===md)closeMd()});
+og.addEventListener('keydown',e=>{const t=e.target,k=e.key,mod=e.ctrlKey||e.metaKey,typing=/INPUT|TEXTAREA|SELECT/.test(t.tagName);
+if(!md.hidden){if(k=='Escape')closeMd();return}if(k=='Escape'&&!mn.hidden){mn.hidden=true;return mbtn.focus()}if(typing)return;
+if(mod&&/^[zy]$/i.test(k)){e.preventDefault();return k.toLowerCase()=='y'||e.shiftKey?restore(fut,hist):restore(hist,fut)}if(t!==cv||mod)return;
+const nav={'/':()=>srch.focus(),f:fit,F:fit,'+':()=>zoom(1.2),'=':()=>zoom(1.2),'-':()=>zoom(1/1.2)};if(nav[k]){e.preventDefault();return nav[k]()}
+const n=sel&&byId[sel];if(!n){if(k.startsWith('Arrow')&&S.nodes.length){e.preventDefault();sel=kof('')[0];commit()}return}
+const tb=S.settings.orient=='tb',sib=kof(n.parent||''),i=sib.indexOf(sel),st=tb&&box[sel]&&box[sel].inS;
+const P=st?'ArrowUp':tb?'ArrowLeft':'ArrowUp',N=st?'ArrowDown':tb?'ArrowRight':'ArrowDown',U=st?'ArrowLeft':tb?'ArrowUp':'ArrowLeft',D=tb?'ArrowDown':'ArrowRight';
+if(k=='Tab'&&!e.shiftKey){e.preventDefault();return add(sel)}if(k=='Enter'){e.preventDefault();return add(n.parent,sel)}if(k=='F2'){e.preventDefault();return openEd(sel,'name')}
+if(k=='Delete'||k=='Backspace'){e.preventDefault();return remove(sel)}if(k=='Escape'){sel=null;return commit()}if(k==' '){e.preventDefault();return kof(sel).length&&collapse(sel)}
+if(!k.startsWith('Arrow'))return;e.preventDefault();if(e.altKey)return k==P?shift(sel,-1):k==N?shift(sel,1):0;
+let to=k==P?(st&&i==0?n.parent:sib[i-1]):k==N?sib[i+1]:k==U?n.parent:k==D&&!st&&kof(sel).length?(n.collapsed=false,kof(sel)[0]):null;if(to&&byId[to]){sel=to;commit();reveal(to)}});
+ttl.value=S.title;index();render();side();
+let fitted=false;new ResizeObserver(()=>{if(!fitted&&cv.clientWidth){fitted=true;fit()}else selBar()}).observe(cv);
+}
+OrgApp();
+</script></div></body></html>

@@ -1,0 +1,18 @@
+{
+  "name": "nodeserver-html",
+  "version": "1.0.0",
+  "description": "Hosts standalone HTML apps from the pages folder behind a list page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0"
+  }
+}
